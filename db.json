@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "name": "item 1", "checked": true },
+    { "name": "item 2", "checked": false },
+    { "name": "item 3", "checked": true },
+    { "name": "itemaggiuntodalURL", "checked": false }
+  ]
+}
