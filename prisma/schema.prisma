@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+//per fare la migrate  npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model List {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String? //? fa in modo che sia opzionale, di default sono required
+  favorite    Boolean  @default(false)
+  items       Item[] //relazione 1 a molti, da guardare nella documentazione di prisma
+  createdAt   DateTime @default(now()) //crea il timestamp
+}
+
+model Item {
+  id      Int     @id @default(autoincrement())
+  label   String
+  checked Boolean @default(false)
+  list    List    @relation(fields: [listId], references: [id])
+  listId  Int
+}
